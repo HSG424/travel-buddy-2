@@ -1,0 +1,37 @@
+.translate-pane {
+  max-width: 18.5rem;
+  margin-top: 3.4rem;
+  margin-bottom: 2.65rem;
+}
+
+.input-field-cont {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  color: #525252;
+  margin-bottom: 2px !important;
+}
+
+.translate-submit {
+  padding: 0.55rem 1.2rem;
+  margin-top: 0.45rem;
+}
+
+.card-mt {
+  margin-top: 2rem;
+}
+
+.card-body-pb {
+  padding-bottom: 1.2rem;
+}
+
+$spinner-size: 2.45rem;
+
+.spinner-size {
+  width: $spinner-size;
+  height: $spinner-size;
+  margin-left: 1.8rem;
+  position: relative;
+  top: 0.9rem;
+}

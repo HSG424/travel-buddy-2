@@ -1,0 +1,30 @@
+// variable overrides:
+$primary: #31aefc;
+$secondary: #f27747;
+
+// Option A: Include all of Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// additional custom GLOBAL styling:
+.btn-outline-primary {
+  color: #038de2;
+}
+
+.btn-check:checked + .btn-outline-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-primary {
+  color: #fff !important;
+}
+
+a,
+a:visited {
+  color: #038de2;
+  text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: #1da6fc;
+}
