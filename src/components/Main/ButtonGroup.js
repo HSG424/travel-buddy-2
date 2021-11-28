@@ -1,5 +1,5 @@
 import classes from "./ButtonGroup.module.scss";
-import { weatherStr, translateStr } from "../../config.js";
+import { WEATHER_STR, TRANSLATE_STR } from "../../config.js";
 
 const ButtonGroup = (props) => {
   const changeRadio = (event) => {
@@ -11,34 +11,34 @@ const ButtonGroup = (props) => {
         type="radio"
         className="btn-check"
         name="btnradio"
-        id={`radio-${weatherStr}`}
+        id={`radio-${WEATHER_STR}`}
         autoComplete="off"
-        checked={props.radio === weatherStr}
-        value={weatherStr}
+        checked={props.radio === WEATHER_STR}
+        value={WEATHER_STR}
         onChange={changeRadio}
       />
       <label
         className="btn btn-outline-primary"
-        htmlFor={`radio-${weatherStr}`}
+        htmlFor={`radio-${WEATHER_STR}`}
       >
-        {weatherStr}
+        {WEATHER_STR}
       </label>
 
       <input
         type="radio"
         className="btn-check"
         name="btnradio"
-        id={`radio-${translateStr}`}
+        id={`radio-${TRANSLATE_STR}`}
         autoComplete="off"
-        checked={props.radio === translateStr}
-        value={translateStr}
+        checked={props.radio === TRANSLATE_STR}
+        value={TRANSLATE_STR}
         onChange={changeRadio}
       />
       <label
         className="btn btn-outline-primary"
-        htmlFor={`radio-${translateStr}`}
+        htmlFor={`radio-${TRANSLATE_STR}`}
       >
-        {translateStr}
+        {TRANSLATE_STR}
       </label>
     </div>
   );

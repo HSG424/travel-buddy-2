@@ -1,2 +1,2 @@
-export const weatherStr = "weather";
-export const translateStr = "translate";
+export const WEATHER_STR = "weather";
+export const TRANSLATE_STR = "translate";

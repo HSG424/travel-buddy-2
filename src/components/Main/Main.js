@@ -2,17 +2,17 @@ import { useState } from "react";
 import ButtonGroup from "./ButtonGroup";
 import Weather from "./Weather";
 import Translate from "./Translate";
-import { weatherStr } from "../../config.js";
+import { WEATHER_STR } from "../../config.js";
 
 const Main = () => {
-  const [radio, setRadio] = useState(weatherStr);
+  const [radio, setRadio] = useState(WEATHER_STR);
 
-  const changeRadio = (radioValue) => {
+  const changeRadioHandler = (radioValue) => {
     setRadio(radioValue);
   };
   return (
     <main>
-      <ButtonGroup radio={radio} onChangeRadio={changeRadio} />
+      <ButtonGroup radio={radio} onChangeRadio={changeRadioHandler} />
       <Weather radio={radio} />
       <Translate radio={radio} />
     </main>

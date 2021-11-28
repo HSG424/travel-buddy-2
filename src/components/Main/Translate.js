@@ -1,11 +1,11 @@
 import classes from "./Translate.module.scss";
-import { translateStr } from "../../config.js";
+import { TRANSLATE_STR } from "../../config.js";
 
 const Translate = (props) => {
   return (
     <div
       className={`mx-auto ${classes["translate-pane"]} ${
-        props.radio !== translateStr && "d-none"
+        props.radio !== TRANSLATE_STR && "d-none"
       }`}
     >
       <form>

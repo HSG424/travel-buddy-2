@@ -1,5 +1,5 @@
 import classes from "./Weather.module.scss";
-import { weatherStr } from "../../config.js";
+import { WEATHER_STR } from "../../config.js";
 
 const Weather = (props) => {
   const changeSystem = (event) => {
@@ -8,7 +8,7 @@ const Weather = (props) => {
   return (
     <div
       className={`mx-auto ${classes["weather-pane"]} ${
-        props.radio !== weatherStr && "d-none"
+        props.radio !== WEATHER_STR && "d-none"
       }`}
     >
       <h3 className={`text-primary ${classes["weather-description"]}`}>
