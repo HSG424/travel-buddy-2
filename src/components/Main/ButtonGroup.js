@@ -2,7 +2,7 @@ import classes from "./ButtonGroup.module.scss";
 import { WEATHER_STR, TRANSLATE_STR } from "../../config.js";
 
 const ButtonGroup = (props) => {
-  const changeRadio = (event) => {
+  const changeRadioHandler = (event) => {
     props.onChangeRadio(event.target.value);
   };
   return (
@@ -15,7 +15,7 @@ const ButtonGroup = (props) => {
         autoComplete="off"
         checked={props.radio === WEATHER_STR}
         value={WEATHER_STR}
-        onChange={changeRadio}
+        onChange={changeRadioHandler}
       />
       <label
         className="btn btn-outline-primary"
@@ -32,7 +32,7 @@ const ButtonGroup = (props) => {
         autoComplete="off"
         checked={props.radio === TRANSLATE_STR}
         value={TRANSLATE_STR}
-        onChange={changeRadio}
+        onChange={changeRadioHandler}
       />
       <label
         className="btn btn-outline-primary"

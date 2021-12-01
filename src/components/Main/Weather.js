@@ -1,10 +1,71 @@
+import { useEffect, useState } from "react";
 import classes from "./Weather.module.scss";
 import { WEATHER_STR } from "../../config.js";
+import Geolocation from "../../helpers/Geolocation";
+import useHttp from "../../hooks/use-http";
+import { ACCUWEATHER_API, ACCUWEATHER_KEY } from "../../config.js";
+import { weatherConditionsFormat } from "../../helpers/weather";
 
 const Weather = (props) => {
+  const [weatherConditions, setWeatherConditions] = useState([]);
+
+  const {
+    isLoading: loadingLocation,
+    error: errorLocation,
+    sendRequest: fetchWeatherLocation,
+  } = useHttp();
+
+  const {
+    isLoading: loadingConditions,
+    error: errorConditions,
+    sendRequest: fetchWeatherConditions,
+  } = useHttp();
+
+  useEffect(() => {
+    //return;
+
+    const processWeatherLocation = (weatherData) => {
+      console.log(
+        weatherData.Key,
+        weatherData.EnglishName,
+        weatherData.AdministrativeArea.EnglishName,
+        weatherData.Country.EnglishName
+      );
+
+      fetchWeatherConditions(
+        {
+          url: `${ACCUWEATHER_API}currentconditions/v1/${weatherData.Key}?apikey=${ACCUWEATHER_KEY}&details=true `,
+        },
+        processWeatherConditions
+      );
+    };
+
+    const processWeatherConditions = (weatherData) => {
+      setWeatherConditions(weatherConditionsFormat(weatherData[0]));
+    };
+
+    const geolocation = async () => {
+      try {
+        const location = new Geolocation();
+        await location.latitudeLongitude();
+        console.log(location.latitude, location.longitude);
+        fetchWeatherLocation(
+          {
+            url: `${ACCUWEATHER_API}locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_KEY}&q=${location.latitude}%2C${location.longitude}`,
+          },
+          processWeatherLocation
+        );
+      } catch (error) {
+        console.log("CATCH BLOCK:: ", error, error.message);
+      }
+    };
+    geolocation();
+  }, [fetchWeatherLocation, fetchWeatherConditions]);
+
   const changeSystem = (event) => {
     console.log("switch the system");
   };
+
   return (
     <div
       className={`mx-auto ${classes["weather-pane"]} ${
@@ -53,21 +114,9 @@ const Weather = (props) => {
       </div>
 
       <ul className={`list-group ${classes["weather-list"]}`}>
-        <li className="list-group-item">Temperature: 83&#176;F</li>
-        <li className="list-group-item">Feels Like: 93&#176;F</li>
-        <li className="list-group-item">Shade Temp: 93&#176;F</li>
-        <li className="list-group-item">
-          24-hour High/Low: 88&#176;F / 78&#176;F
-        </li>
-        <li className="list-group-item">Relative Humidity: 85%</li>
-        <li className="list-group-item">Wind: 7 mi/h</li>
-        <li className="list-group-item">UV Index: 1 (Low)</li>
-        <li className="list-group-item">Visibility: 5 mi</li>
-        <li className="list-group-item">Precipitation (1 hour): 0 in</li>
-        <li className="list-group-item">Precipitation (24 hours): 0.25 in</li>
-        <li className="list-group-item">Latitude: 10.932152</li>
-        <li className="list-group-item">Longitude: 104.798771</li>
-        <li className="list-group-item">Last Update: 10/8/2021, 5:05:00 PM</li>
+        {weatherConditions.map((condition) => (
+          <li className="list-group-item">{condition}</li>
+        ))}
       </ul>
     </div>
   );
