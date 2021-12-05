@@ -13,6 +13,13 @@ export const ACCUWEATHER_API = "http://dataservice.accuweather.com/";
  */
 export const ACCUWEATHER_KEY = "BGeX6oJdTs1DM8FFmqB7tQRCyq04FmFg";
 
+/**
+ * 'accuWeatherIcons' is the URL where weather icon images are located.
+ * @const {String}
+ */
+export const ACCUWEATHER_ICONS =
+  "https://developer.accuweather.com/sites/default/files/";
+
 export const WEATHER_STR = "weather";
 export const TRANSLATE_STR = "translate";
 
@@ -24,3 +31,6 @@ export const geoOptions = {
   enableHighAccuracy: true,
   timeout: 7000, // 7 seconds to retrieve location or call error handler
 };
+
+export const METRIC_STR = "Metric";
+export const IMPERIAL_STR = "Imperial";

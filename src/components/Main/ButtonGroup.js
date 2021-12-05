@@ -10,7 +10,7 @@ const ButtonGroup = (props) => {
       <input
         type="radio"
         className="btn-check"
-        name="btnradio"
+        name="change-content"
         id={`radio-${WEATHER_STR}`}
         autoComplete="off"
         checked={props.radio === WEATHER_STR}
@@ -27,7 +27,7 @@ const ButtonGroup = (props) => {
       <input
         type="radio"
         className="btn-check"
-        name="btnradio"
+        name="change-content"
         id={`radio-${TRANSLATE_STR}`}
         autoComplete="off"
         checked={props.radio === TRANSLATE_STR}

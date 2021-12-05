@@ -7,6 +7,10 @@ const useHttp = () => {
   const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(null);
+
+    //return for testing loading and error states
+    //return;
+
     try {
       const response = await fetch(requestConfig.url, {
         method: requestConfig.method ? requestConfig.method : "GET",
@@ -22,6 +26,9 @@ const useHttp = () => {
       applyData(data);
     } catch (err) {
       setError(err.message || "Something went wrong!");
+      console.log("error: ", err);
+      //setError("Something went wrong!");
+      //throw err;
     }
     setIsLoading(false);
   }, []);

@@ -1,13 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import classes from "./Weather.module.scss";
 import { WEATHER_STR } from "../../config.js";
 import Geolocation from "../../helpers/Geolocation";
 import useHttp from "../../hooks/use-http";
-import { ACCUWEATHER_API, ACCUWEATHER_KEY } from "../../config.js";
-import { weatherConditionsFormat } from "../../helpers/weather";
+import {
+  ACCUWEATHER_API,
+  ACCUWEATHER_KEY,
+  METRIC_STR,
+  IMPERIAL_STR,
+} from "../../config.js";
+import {
+  weatherLocationStr,
+  weatherConditionsList,
+  weatherDescription,
+  weatherIcon,
+} from "../../helpers/weather";
 
 const Weather = (props) => {
-  const [weatherConditions, setWeatherConditions] = useState([]);
+  const [selectedSystem, setSelectedSystem] = useState(IMPERIAL_STR);
+
+  const [weatherData, setWeatherData] = useState({});
+
+  const [weatherLocation, setWeatherLocation] = useState("");
+
+  const [weatherConditions, setWeatherConditions] = useState({
+    weatherDescription: "",
+    weatherIcon: "",
+    weatherConditions: [],
+  });
 
   const {
     isLoading: loadingLocation,
@@ -24,34 +44,39 @@ const Weather = (props) => {
   useEffect(() => {
     //return;
 
-    const processWeatherLocation = (weatherData) => {
-      console.log(
-        weatherData.Key,
-        weatherData.EnglishName,
-        weatherData.AdministrativeArea.EnglishName,
-        weatherData.Country.EnglishName
-      );
+    const processWeatherLocation = (locationData) => {
+      setWeatherLocation(weatherLocationStr(locationData));
 
       fetchWeatherConditions(
         {
-          url: `${ACCUWEATHER_API}currentconditions/v1/${weatherData.Key}?apikey=${ACCUWEATHER_KEY}&details=true `,
+          url: `${ACCUWEATHER_API}currentconditions/v1/${locationData.Key}?apikey=${ACCUWEATHER_KEY}&details=true `,
         },
         processWeatherConditions
       );
     };
 
-    const processWeatherConditions = (weatherData) => {
-      setWeatherConditions(weatherConditionsFormat(weatherData[0]));
+    const processWeatherConditions = ([weatherData]) => {
+      setWeatherData(weatherData);
+      setWeatherConditions({
+        weatherDescription: weatherDescription(
+          weatherData.WeatherText,
+          weatherData.Temperature,
+          selectedSystem
+        ),
+        weatherIcon: weatherIcon(weatherData.WeatherIcon),
+        weatherConditions: weatherConditionsList(weatherData, selectedSystem),
+      });
     };
 
     const geolocation = async () => {
       try {
         const location = new Geolocation();
         await location.latitudeLongitude();
-        console.log(location.latitude, location.longitude);
+
         fetchWeatherLocation(
           {
             url: `${ACCUWEATHER_API}locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_KEY}&q=${location.latitude}%2C${location.longitude}`,
+            //url: `${ACCUWEATHER_API}locationsZZZ/v1/cities/geoposition/search?apikey=fsafadsfadsfdsf&q=${location.latitude}%2C${location.longitude}`,
           },
           processWeatherLocation
         );
@@ -62,9 +87,116 @@ const Weather = (props) => {
     geolocation();
   }, [fetchWeatherLocation, fetchWeatherConditions]);
 
-  const changeSystem = (event) => {
-    console.log("switch the system");
+  const changeSystemHandler = (event) => {
+    const { value: newSystem } = event.target;
+
+    setSelectedSystem(newSystem);
+
+    setWeatherConditions({
+      ...weatherConditions,
+      weatherDescription: weatherDescription(
+        weatherData.WeatherText,
+        weatherData.Temperature,
+        newSystem
+      ),
+      weatherConditions: weatherConditionsList(weatherData, newSystem),
+    });
   };
+
+  let content;
+
+  if (errorLocation || errorConditions) {
+    content = (
+      <Fragment>
+        <div
+          className={`alert alert-danger ${classes["alert-http"]}`}
+          role="alert"
+        >
+          {errorLocation || errorConditions}
+        </div>
+
+        <button
+          type="button"
+          className={`btn btn-primary ${classes["try-again"]}`}
+        >
+          Try Again
+        </button>
+      </Fragment>
+    );
+  }
+
+  if (loadingLocation || loadingConditions) {
+    content = (
+      <div className={`spinner-border text-primary ${classes["spinner-size"]}`}>
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
+  }
+
+  if (weatherConditions.weatherConditions.length > 0) {
+    content = (
+      <Fragment>
+        <h3 className={`text-primary ${classes["weather-description"]}`}>
+          {weatherConditions.weatherDescription}
+        </h3>
+        <img
+          className={classes["weather-image"]}
+          src={weatherConditions.weatherIcon}
+          alt={weatherConditions.weatherDescription}
+        />
+
+        <h5 className={`text-secondary ${classes["weather-location"]}`}>
+          {weatherLocation}
+        </h5>
+
+        <div
+          className={`mx-auto ${classes["switch-systems"]} ${
+            !weatherConditions.weatherConditions.length && "d-none"
+          }`}
+        >
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="switch-system"
+              id={`switch${IMPERIAL_STR}`}
+              autoComplete="off"
+              checked={selectedSystem === IMPERIAL_STR}
+              onChange={changeSystemHandler}
+              value={IMPERIAL_STR}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`switch${IMPERIAL_STR}`}
+            >
+              {IMPERIAL_STR}
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="switch-system"
+              id={`switch${METRIC_STR}`}
+              autoComplete="off"
+              checked={selectedSystem === METRIC_STR}
+              onChange={changeSystemHandler}
+              value={METRIC_STR}
+            />
+            <label className="form-check-label" htmlFor={`switch${METRIC_STR}`}>
+              {METRIC_STR}
+            </label>
+          </div>
+        </div>
+
+        <ul className={`list-group ${classes["weather-list"]}`}>
+          {weatherConditions.weatherConditions.map((condition) => (
+            <li className="list-group-item">{condition}</li>
+          ))}
+        </ul>
+      </Fragment>
+    );
+  }
 
   return (
     <div
@@ -72,52 +204,7 @@ const Weather = (props) => {
         props.radio !== WEATHER_STR && "d-none"
       }`}
     >
-      <h3 className={`text-primary ${classes["weather-description"]}`}>
-        Cloudy
-      </h3>
-      <img
-        className={classes["weather-image"]}
-        src="https://developer.accuweather.com/sites/default/files/07-s.png"
-        alt="Accuweather weather graphic"
-      />
-
-      <h5 className={`text-secondary ${classes["weather-location"]}`}>
-        Takev, Taakaev Cambodia
-      </h5>
-
-      <div className={`mx-auto ${classes["switch-systems"]}`}>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="flexRadioDefault1"
-            checked
-            onChange={changeSystem}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Imperial
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="flexRadioDefault"
-            id="flexRadioDefault2"
-            onChange={changeSystem}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault2">
-            Metric
-          </label>
-        </div>
-      </div>
-
-      <ul className={`list-group ${classes["weather-list"]}`}>
-        {weatherConditions.map((condition) => (
-          <li className="list-group-item">{condition}</li>
-        ))}
-      </ul>
+      {content}
     </div>
   );
 };
