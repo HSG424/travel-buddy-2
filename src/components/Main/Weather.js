@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import classes from "./Weather.module.scss";
 import { WEATHER_STR } from "../../config.js";
 import Geolocation from "../../helpers/Geolocation";
-import useHttp from "../../hooks/use-http";
+import useHttp from "../../hooks/use-accuweather-mock-data";
 import {
   ACCUWEATHER_API,
   ACCUWEATHER_KEY,
