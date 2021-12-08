@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import classes from "./Weather.module.scss";
 import { WEATHER_STR } from "../../../config.js";
 import Geolocation from "../../../helpers/Geolocation";
@@ -7,7 +7,6 @@ import useHttp from "../../../hooks/use-accuweather-mock-data";
 import {
   ACCUWEATHER_API,
   ACCUWEATHER_KEY,
-  METRIC_STR,
   IMPERIAL_STR,
 } from "../../../config.js";
 import {
@@ -18,6 +17,7 @@ import {
 } from "../../../helpers/weather";
 import Error from "./Error";
 import Loading from "./Loading";
+import WeatherConditions from "./WeatherConditions";
 
 const Weather = (props) => {
   const [selectedSystem, setSelectedSystem] = useState(IMPERIAL_STR);
@@ -128,66 +128,12 @@ const Weather = (props) => {
 
   if (weatherConditions.weatherConditions.length > 0) {
     content = (
-      <Fragment>
-        <h3 className={`text-primary ${classes["weather-description"]}`}>
-          {weatherConditions.weatherDescription}
-        </h3>
-        <img
-          className={classes["weather-image"]}
-          src={weatherConditions.weatherIcon}
-          alt={weatherConditions.weatherDescription}
-        />
-
-        <h5 className={`text-secondary ${classes["weather-location"]}`}>
-          {weatherLocation}
-        </h5>
-
-        <div
-          className={`mx-auto ${classes["switch-systems"]} ${
-            !weatherConditions.weatherConditions.length && "d-none"
-          }`}
-        >
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="switch-system"
-              id={`switch${IMPERIAL_STR}`}
-              autoComplete="off"
-              checked={selectedSystem === IMPERIAL_STR}
-              onChange={changeSystemHandler}
-              value={IMPERIAL_STR}
-            />
-            <label
-              className="form-check-label"
-              htmlFor={`switch${IMPERIAL_STR}`}
-            >
-              {IMPERIAL_STR}
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="switch-system"
-              id={`switch${METRIC_STR}`}
-              autoComplete="off"
-              checked={selectedSystem === METRIC_STR}
-              onChange={changeSystemHandler}
-              value={METRIC_STR}
-            />
-            <label className="form-check-label" htmlFor={`switch${METRIC_STR}`}>
-              {METRIC_STR}
-            </label>
-          </div>
-        </div>
-
-        <ul className={`list-group ${classes["weather-list"]}`}>
-          {weatherConditions.weatherConditions.map((condition) => (
-            <li className="list-group-item">{condition}</li>
-          ))}
-        </ul>
-      </Fragment>
+      <WeatherConditions
+        weatherConditions={weatherConditions}
+        weatherLocation={weatherLocation}
+        selectedSystem={selectedSystem}
+        onChangeSystem={changeSystemHandler}
+      />
     );
   }
 
