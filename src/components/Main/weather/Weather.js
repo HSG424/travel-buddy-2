@@ -1,21 +1,23 @@
 import { useEffect, useState, Fragment, useCallback } from "react";
 import classes from "./Weather.module.scss";
-import { WEATHER_STR } from "../../config.js";
-import Geolocation from "../../helpers/Geolocation";
-import useHttp from "../../hooks/use-accuweather-mock-data";
+import { WEATHER_STR } from "../../../config.js";
+import Geolocation from "../../../helpers/Geolocation";
+import useHttp from "../../../hooks/use-accuweather-mock-data";
 //import useHttp from "../../hooks/use-http";
 import {
   ACCUWEATHER_API,
   ACCUWEATHER_KEY,
   METRIC_STR,
   IMPERIAL_STR,
-} from "../../config.js";
+} from "../../../config.js";
 import {
   weatherLocationStr,
   weatherConditionsList,
   weatherDescription,
   weatherIcon,
-} from "../../helpers/weather";
+} from "../../../helpers/weather";
+import Error from "./Error";
+import Loading from "./Loading";
 
 const Weather = (props) => {
   const [selectedSystem, setSelectedSystem] = useState(IMPERIAL_STR);
@@ -112,31 +114,16 @@ const Weather = (props) => {
 
   if (errorLocation || errorConditions) {
     content = (
-      <Fragment>
-        <div
-          className={`alert alert-danger ${classes["alert-http"]}`}
-          role="alert"
-        >
-          {errorLocation || errorConditions}
-        </div>
-
-        <button
-          type="button"
-          className={`btn btn-primary ${classes["try-again"]}`}
-          onClick={geolocation}
-        >
-          Try Again
-        </button>
-      </Fragment>
+      <Error
+        errorLocation={errorLocation}
+        errorConditions={errorConditions}
+        onGeolocation={geolocation}
+      />
     );
   }
 
   if (loadingLocation || loadingConditions) {
-    content = (
-      <div className={`spinner-border text-primary ${classes["spinner-size"]}`}>
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    );
+    content = <Loading />;
   }
 
   if (weatherConditions.weatherConditions.length > 0) {

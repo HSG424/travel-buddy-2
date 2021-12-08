@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ButtonGroup from "./ButtonGroup";
-import Weather from "./Weather";
+import Weather from "./weather/Weather";
 import Translate from "./Translate";
 import { WEATHER_STR } from "../../config.js";
 

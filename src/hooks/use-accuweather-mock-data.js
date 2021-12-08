@@ -32,6 +32,8 @@ const useHttp = () => {
     setIsLoading(true);
     setError(null);
 
+    //return;
+
     try {
       const data = await resolveWeatherData(requestConfig.url);
       applyData(data);
