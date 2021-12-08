@@ -74,7 +74,7 @@ const Weather = (props) => {
     [fetchWeatherConditions, processWeatherConditions]
   );
 
-  const geolocation = useCallback(async () => {
+  const locationWeather = useCallback(async () => {
     try {
       const location = new Geolocation();
       await location.latitudeLongitude();
@@ -91,8 +91,8 @@ const Weather = (props) => {
   }, [fetchWeatherLocation, processWeatherLocation]);
 
   useEffect(() => {
-    geolocation();
-  }, [geolocation]);
+    locationWeather();
+  }, [locationWeather]);
 
   const changeSystemHandler = (event) => {
     const { value: newSystem } = event.target;
@@ -117,7 +117,7 @@ const Weather = (props) => {
       <Error
         errorLocation={errorLocation}
         errorConditions={errorConditions}
-        onGeolocation={geolocation}
+        onLocationWeather={locationWeather}
       />
     );
   }
