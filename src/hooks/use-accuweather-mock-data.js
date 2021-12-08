@@ -12,7 +12,7 @@ const weatherConditionsData = `{"LocalObservationDateTime":"2021-12-06T18:56:00+
 const resolveWeatherData = (url) => {
   return new Promise((resolve, reject) => {
     // testing error state
-    reject(new Error("Testing Error State..."));
+    //reject(new Error("Testing Error State..."));
 
     setTimeout(function () {
       if (url.includes("currentconditions")) {

@@ -1,8 +1,9 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useCallback } from "react";
 import classes from "./Weather.module.scss";
 import { WEATHER_STR } from "../../config.js";
 import Geolocation from "../../helpers/Geolocation";
 import useHttp from "../../hooks/use-accuweather-mock-data";
+//import useHttp from "../../hooks/use-http";
 import {
   ACCUWEATHER_API,
   ACCUWEATHER_KEY,
@@ -41,21 +42,8 @@ const Weather = (props) => {
     sendRequest: fetchWeatherConditions,
   } = useHttp();
 
-  useEffect(() => {
-    //return;
-
-    const processWeatherLocation = (locationData) => {
-      setWeatherLocation(weatherLocationStr(locationData));
-
-      fetchWeatherConditions(
-        {
-          url: `${ACCUWEATHER_API}currentconditions/v1/${locationData.Key}?apikey=${ACCUWEATHER_KEY}&details=true `,
-        },
-        processWeatherConditions
-      );
-    };
-
-    const processWeatherConditions = ([weatherData]) => {
+  const processWeatherConditions = useCallback(
+    ([weatherData]) => {
       setWeatherData(weatherData);
       setWeatherConditions({
         weatherDescription: weatherDescription(
@@ -66,26 +54,43 @@ const Weather = (props) => {
         weatherIcon: weatherIcon(weatherData.WeatherIcon),
         weatherConditions: weatherConditionsList(weatherData, selectedSystem),
       });
-    };
+    },
+    [selectedSystem]
+  );
 
-    const geolocation = async () => {
-      try {
-        const location = new Geolocation();
-        await location.latitudeLongitude();
+  const processWeatherLocation = useCallback(
+    (locationData) => {
+      setWeatherLocation(weatherLocationStr(locationData));
 
-        fetchWeatherLocation(
-          {
-            url: `${ACCUWEATHER_API}locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_KEY}&q=${location.latitude}%2C${location.longitude}`,
-            //url: `${ACCUWEATHER_API}locationsZZZ/v1/cities/geoposition/search?apikey=fsafadsfadsfdsf&q=${location.latitude}%2C${location.longitude}`,
-          },
-          processWeatherLocation
-        );
-      } catch (error) {
-        console.log("CATCH BLOCK:: ", error, error.message);
-      }
-    };
+      fetchWeatherConditions(
+        {
+          url: `${ACCUWEATHER_API}currentconditions/v1/${locationData.Key}?apikey=${ACCUWEATHER_KEY}&details=true `,
+        },
+        processWeatherConditions
+      );
+    },
+    [fetchWeatherConditions, processWeatherConditions]
+  );
+
+  const geolocation = useCallback(async () => {
+    try {
+      const location = new Geolocation();
+      await location.latitudeLongitude();
+
+      fetchWeatherLocation(
+        {
+          url: `${ACCUWEATHER_API}locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_KEY}&q=${location.latitude}%2C${location.longitude}`,
+        },
+        processWeatherLocation
+      );
+    } catch (error) {
+      console.log("CATCH BLOCK:: ", error, error.message);
+    }
+  }, [fetchWeatherLocation, processWeatherLocation]);
+
+  useEffect(() => {
     geolocation();
-  }, [fetchWeatherLocation, fetchWeatherConditions]);
+  }, [geolocation]);
 
   const changeSystemHandler = (event) => {
     const { value: newSystem } = event.target;
@@ -118,6 +123,7 @@ const Weather = (props) => {
         <button
           type="button"
           className={`btn btn-primary ${classes["try-again"]}`}
+          onClick={geolocation}
         >
           Try Again
         </button>
