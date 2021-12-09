@@ -8,9 +8,6 @@ const useHttp = () => {
     setIsLoading(true);
     setError(null);
 
-    //return for testing loading and error states
-    //return;
-
     try {
       const response = await fetch(requestConfig.url, {
         method: requestConfig.method ? requestConfig.method : "GET",
@@ -27,8 +24,6 @@ const useHttp = () => {
     } catch (err) {
       setError(err.message || "Something went wrong!");
       console.log("error: ", err);
-      //setError("Something went wrong!");
-      //throw err;
     }
     setIsLoading(false);
   }, []);

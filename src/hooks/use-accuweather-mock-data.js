@@ -16,8 +16,14 @@ const resolveWeatherData = (url) => {
 
     setTimeout(function () {
       if (url.includes("currentconditions")) {
+        /*
+        reject(
+          new Error("Rejecting the Second API Call (Current Conditions API)")
+        );
+        */
         resolve([JSON.parse(weatherConditionsData)]);
       } else {
+        //reject(new Error("Rejecting the First API Call (Locations API)"));
         resolve(JSON.parse(weatherLocationData));
       }
     }, 0.1 * 1000);

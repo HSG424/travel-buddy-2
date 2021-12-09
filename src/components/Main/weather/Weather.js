@@ -32,6 +32,8 @@ const Weather = (props) => {
     weatherConditions: [],
   });
 
+  const [error, setError] = useState(null);
+
   const {
     isLoading: loadingLocation,
     error: errorLocation,
@@ -74,7 +76,7 @@ const Weather = (props) => {
     [fetchWeatherConditions, processWeatherConditions]
   );
 
-  const locationWeather = useCallback(async () => {
+  const locationWeatherHandler = useCallback(async () => {
     try {
       const location = new Geolocation();
       await location.latitudeLongitude();
@@ -85,14 +87,14 @@ const Weather = (props) => {
         },
         processWeatherLocation
       );
-    } catch (error) {
-      console.log("CATCH BLOCK:: ", error, error.message);
+    } catch (err) {
+      setError(err || "Something went wrong!");
     }
   }, [fetchWeatherLocation, processWeatherLocation]);
 
   useEffect(() => {
-    locationWeather();
-  }, [locationWeather]);
+    locationWeatherHandler();
+  }, [locationWeatherHandler]);
 
   const changeSystemHandler = (event) => {
     const { value: newSystem } = event.target;
@@ -110,15 +112,13 @@ const Weather = (props) => {
     });
   };
 
-  let content;
+  const errorMsg = error || errorLocation || errorConditions || "";
 
-  if (errorLocation || errorConditions) {
+  let content = "";
+
+  if (errorMsg) {
     content = (
-      <Error
-        errorLocation={errorLocation}
-        errorConditions={errorConditions}
-        onLocationWeather={locationWeather}
-      />
+      <Error errorMsg={errorMsg} onLocationWeather={locationWeatherHandler} />
     );
   }
 

@@ -8,13 +8,13 @@ const Error = (props) => {
         className={`alert alert-danger ${classes["alert-http"]}`}
         role="alert"
       >
-        {props.errorLocation || props.errorConditions}
+        {props.errorMsg}
       </div>
 
       <button
         type="button"
         className={`btn btn-primary ${classes["try-again"]}`}
-        onClick={props.onGeolocation}
+        onClick={props.onLocationWeather}
       >
         Try Again
       </button>
