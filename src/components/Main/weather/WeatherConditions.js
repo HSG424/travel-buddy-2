@@ -18,11 +18,7 @@ const WeatherConditions = (props) => {
         {props.weatherLocation}
       </h5>
 
-      <div
-        className={`mx-auto ${classes["switch-systems"]} ${
-          !props.weatherConditions.weatherConditions.length && "d-none"
-        }`}
-      >
+      <div className={`mx-auto ${classes["switch-systems"]}`}>
         <div className="form-check">
           <input
             className="form-check-input"

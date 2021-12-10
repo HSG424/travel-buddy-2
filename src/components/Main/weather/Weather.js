@@ -126,7 +126,7 @@ const Weather = (props) => {
     content = <Loading />;
   }
 
-  if (weatherConditions.weatherConditions.length > 0) {
+  if (weatherConditions.weatherConditions.length) {
     content = (
       <WeatherConditions
         weatherConditions={weatherConditions}

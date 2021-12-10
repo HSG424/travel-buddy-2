@@ -35,6 +35,8 @@ const useHttp = () => {
   const [error, setError] = useState(null);
 
   const sendRequest = useCallback(async (requestConfig, applyData) => {
+    //return;
+
     setIsLoading(true);
     setError(null);
 
