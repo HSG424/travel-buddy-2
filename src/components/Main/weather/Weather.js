@@ -92,9 +92,11 @@ const Weather = (props) => {
     }
   }, [fetchWeatherLocation, processWeatherLocation]);
 
+  const dataNotRetrieved = Object.keys(weatherData).length === 0;
+
   useEffect(() => {
-    locationWeatherHandler();
-  }, [locationWeatherHandler]);
+    dataNotRetrieved && locationWeatherHandler();
+  }, [locationWeatherHandler, dataNotRetrieved]);
 
   const changeSystemHandler = (event) => {
     const { value: newSystem } = event.target;
@@ -126,7 +128,7 @@ const Weather = (props) => {
     content = <Loading />;
   }
 
-  if (weatherConditions.weatherConditions.length) {
+  if (!dataNotRetrieved) {
     content = (
       <WeatherConditions
         weatherConditions={weatherConditions}
