@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
 import classes from "./Weather.module.scss";
-import { WEATHER_STR } from "../../../config.js";
 import Geolocation from "../../../helpers/Geolocation";
 import useHttp from "../../../hooks/use-accuweather-mock-data";
 //import useHttp from "../../hooks/use-http";
 import {
+  WEATHER_STR,
   ACCUWEATHER_API,
   ACCUWEATHER_KEY,
   IMPERIAL_STR,

@@ -34,3 +34,7 @@ export const geoOptions = {
 
 export const METRIC_STR = "Metric";
 export const IMPERIAL_STR = "Imperial";
+
+export const MY_MEMORY_API = "https://api.mymemory.translated.net/get";
+export const TRANSLATE_FROM = "en";
+export const TRANSLATE_TO = "ko";
