@@ -16,7 +16,7 @@ import {
   weatherIcon,
 } from "../../../helpers/weather";
 import Error from "./Error";
-import Loading from "./Loading";
+import Loading from "../Loading";
 import WeatherConditions from "./WeatherConditions";
 
 const Weather = (props) => {
@@ -125,7 +125,7 @@ const Weather = (props) => {
   }
 
   if (loadingLocation || loadingConditions) {
-    content = <Loading />;
+    content = <Loading type={WEATHER_STR} />;
   }
 
   if (!dataNotRetrieved) {

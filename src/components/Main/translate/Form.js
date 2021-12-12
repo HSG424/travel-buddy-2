@@ -1,6 +1,11 @@
 import classes from "./Form.module.scss";
-import { TRANSLATE_FROM, TRANSLATE_TO } from "../../../config.js";
+import {
+  TRANSLATE_FROM,
+  TRANSLATE_TO,
+  TRANSLATE_STR,
+} from "../../../config.js";
 import languageCodes from "../../../helpers/languages";
+import Loading from "../Loading";
 
 const Form = (props) => {
   return (
@@ -46,13 +51,7 @@ const Form = (props) => {
         Translate
       </button>
 
-      <div
-        className={`${
-          !props.isLoading && "d-none"
-        } spinner-border text-primary ${classes["spinner-size"]}`}
-      >
-        <span className="visually-hidden">Loading...</span>
-      </div>
+      {props.isLoading && <Loading type={TRANSLATE_STR} />}
     </form>
   );
 };
