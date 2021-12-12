@@ -1,18 +1,12 @@
 import { Fragment } from "react";
 import classes from "./Results.module.scss";
+import Error from "../Error";
+import { TRANSLATE_STR } from "../../../config.js";
 
 const Results = (props) => {
   return (
     <Fragment>
-      <div
-        className={`${!props.error && "d-none"} alert alert-danger ${
-          classes["alert-margin"]
-        }`}
-        role="alert"
-      >
-        {props.error}
-      </div>
-
+      {props.error && <Error errorMsg={props.error} type={TRANSLATE_STR} />}
       <div
         className={`${
           !props.translatedText && "d-none"

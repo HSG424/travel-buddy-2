@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Fragment } from "react";
 import classes from "./Weather.module.scss";
 import Geolocation from "../../../helpers/Geolocation";
 import useHttp from "../../../hooks/use-accuweather-mock-data";
@@ -15,7 +15,7 @@ import {
   weatherDescription,
   weatherIcon,
 } from "../../../helpers/weather";
-import Error from "./Error";
+import Error from "../Error";
 import Loading from "../Loading";
 import WeatherConditions from "./WeatherConditions";
 
@@ -120,7 +120,16 @@ const Weather = (props) => {
 
   if (errorMsg) {
     content = (
-      <Error errorMsg={errorMsg} onLocationWeather={locationWeatherHandler} />
+      <Fragment>
+        <Error errorMsg={errorMsg} type={WEATHER_STR} />
+        <button
+          type="button"
+          className={`btn btn-primary ${classes["try-again"]}`}
+          onClick={locationWeatherHandler}
+        >
+          Try Again
+        </button>
+      </Fragment>
     );
   }
 
