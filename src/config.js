@@ -1,3 +1,9 @@
+export const WEATHER_STR = "weather";
+export const TRANSLATE_STR = "translate";
+
+export const METRIC_STR = "Metric";
+export const IMPERIAL_STR = "Imperial";
+
 /**
  * 'accuWeatherAPI' is the URL for AccuWeather API requests.
  * @const {String}
@@ -20,8 +26,10 @@ export const ACCUWEATHER_KEY = "BGeX6oJdTs1DM8FFmqB7tQRCyq04FmFg";
 export const ACCUWEATHER_ICONS =
   "https://developer.accuweather.com/sites/default/files/";
 
-export const WEATHER_STR = "weather";
-export const TRANSLATE_STR = "translate";
+export const MY_MEMORY_API = "https://api.mymemory.translated.net/get";
+
+export const TRANSLATE_FROM = "en";
+export const TRANSLATE_TO = "ko";
 
 /**
  * 'geoOptions' is an object that holds overrides to the default Geolocation config settings.
@@ -31,10 +39,3 @@ export const geoOptions = {
   enableHighAccuracy: true,
   timeout: 7000, // 7 seconds to retrieve location or call error handler
 };
-
-export const METRIC_STR = "Metric";
-export const IMPERIAL_STR = "Imperial";
-
-export const MY_MEMORY_API = "https://api.mymemory.translated.net/get";
-export const TRANSLATE_FROM = "en";
-export const TRANSLATE_TO = "ko";
