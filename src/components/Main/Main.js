@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ButtonGroup from "./ButtonGroup";
-import Weather from "./weather/Weather";
-import Translate from "./translate/Translate";
+import Weather from "./Weather/Weather";
+import Translate from "./Translate/Translate";
 import { WEATHER_STR } from "../../config.js";
 
 const Main = () => {
