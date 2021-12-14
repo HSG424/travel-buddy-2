@@ -4,7 +4,7 @@ import {
   TRANSLATE_TO,
   TRANSLATE_STR,
 } from "../../../config.js";
-import languageCodes from "../../../helpers/languages";
+import isoLanguages from "../../../helpers/languages";
 import Loading from "../Loading";
 
 const Form = (props) => {
@@ -28,8 +28,10 @@ const Form = (props) => {
           onChange={props.onFromChange}
           defaultValue={TRANSLATE_FROM}
         >
-          {languageCodes.map((lang) => (
-            <option value={lang.code}>{lang.name}</option>
+          {isoLanguages.map((lang, i) => (
+            <option value={lang.code} key={`from-${i}`}>
+              {lang.name}
+            </option>
           ))}
         </select>
       </div>
@@ -41,8 +43,10 @@ const Form = (props) => {
           onChange={props.onToChange}
           defaultValue={TRANSLATE_TO}
         >
-          {languageCodes.map((lang) => (
-            <option value={lang.code}>{lang.name}</option>
+          {isoLanguages.map((lang, i) => (
+            <option value={lang.code} key={`to-${i}`}>
+              {lang.name}
+            </option>
           ))}
         </select>
       </div>

@@ -52,8 +52,10 @@ const WeatherConditions = (props) => {
       </div>
 
       <ul className={`list-group ${classes["weather-list"]}`}>
-        {props.weatherConditions.weatherConditions.map((condition) => (
-          <li className="list-group-item">{condition}</li>
+        {props.weatherConditions.weatherConditions.map((condition, i) => (
+          <li className="list-group-item" key={`condition-${i}`}>
+            {condition}
+          </li>
         ))}
       </ul>
     </Fragment>

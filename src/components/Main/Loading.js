@@ -1,5 +1,4 @@
 import classes from "./Loading.module.scss";
-import { WEATHER_STR } from "../../config.js";
 
 const Loading = (props) => {
   return (
