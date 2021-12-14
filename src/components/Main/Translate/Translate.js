@@ -9,6 +9,7 @@ import {
 import useHttp from "../../../hooks/use-http";
 import Form from "./Form";
 import Results from "./Results";
+import Error from "../Error";
 
 const Translate = (props) => {
   const [translateText, setTranslateText] = useState("");
@@ -62,8 +63,8 @@ const Translate = (props) => {
         isLoading={isLoading}
         translateText={translateText}
       />
-
-      <Results error={error} translatedText={translatedText} />
+      {error && <Error errorMsg={error} type={TRANSLATE_STR} />}
+      <Results translatedText={translatedText} />
     </div>
   );
 };
