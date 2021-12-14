@@ -23,22 +23,26 @@ const Form = (props) => {
 
       <div className={classes["input-field-cont"]}>
         <label className={classes["form-label"]}>From</label>
-        <select className="form-control" onChange={props.onFromChange}>
+        <select
+          className="form-control"
+          onChange={props.onFromChange}
+          defaultValue={TRANSLATE_FROM}
+        >
           {languageCodes.map((lang) => (
-            <option value={lang.code} selected={lang.code === TRANSLATE_FROM}>
-              {lang.name}
-            </option>
+            <option value={lang.code}>{lang.name}</option>
           ))}
         </select>
       </div>
 
       <div className={classes["input-field-cont"]}>
         <label className={classes["form-label"]}>To</label>
-        <select className="form-control" onChange={props.onToChange}>
+        <select
+          className="form-control"
+          onChange={props.onToChange}
+          defaultValue={TRANSLATE_TO}
+        >
           {languageCodes.map((lang) => (
-            <option value={lang.code} selected={lang.code === TRANSLATE_TO}>
-              {lang.name}
-            </option>
+            <option value={lang.code}>{lang.name}</option>
           ))}
         </select>
       </div>
