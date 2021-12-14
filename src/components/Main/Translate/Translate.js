@@ -1,15 +1,19 @@
 import { useState } from "react";
-import classes from "./Translate.module.scss";
+
+import useHttp from "../../../hooks/use-http";
+
 import {
   MY_MEMORY_API,
   TRANSLATE_STR,
   TRANSLATE_FROM,
   TRANSLATE_TO,
 } from "../../../config.js";
-import useHttp from "../../../hooks/use-http";
+
 import Form from "./Form";
 import Results from "./Results";
 import Error from "../Error";
+
+import classes from "./Translate.module.scss";
 
 const Translate = (props) => {
   const [translateText, setTranslateText] = useState("");

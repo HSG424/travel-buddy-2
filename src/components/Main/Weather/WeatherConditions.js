@@ -1,6 +1,8 @@
 import { Fragment } from "react";
-import classes from "./WeatherConditions.module.scss";
+
 import { METRIC_STR, IMPERIAL_STR } from "../../../config.js";
+
+import classes from "./WeatherConditions.module.scss";
 
 const WeatherConditions = (props) => {
   return (

@@ -1,11 +1,14 @@
-import classes from "./Form.module.scss";
+import isoLanguages from "../../../helpers/languages";
+
 import {
   TRANSLATE_FROM,
   TRANSLATE_TO,
   TRANSLATE_STR,
 } from "../../../config.js";
-import isoLanguages from "../../../helpers/languages";
+
 import Loading from "../Loading";
+
+import classes from "./Form.module.scss";
 
 const Form = (props) => {
   return (

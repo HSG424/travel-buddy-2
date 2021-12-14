@@ -1,23 +1,28 @@
 import { useEffect, useState, useCallback, Fragment } from "react";
-import classes from "./Weather.module.scss";
-import Geolocation from "../../../helpers/Geolocation";
+
 import useHttp from "../../../hooks/use-accuweather-mock-data";
 //import useHttp from "../../hooks/use-http";
+
 import {
   WEATHER_STR,
   ACCUWEATHER_API,
   ACCUWEATHER_KEY,
   IMPERIAL_STR,
 } from "../../../config.js";
+
+import Geolocation from "../../../helpers/Geolocation";
 import {
   weatherLocationStr,
   weatherConditionsList,
   weatherDescription,
   weatherIcon,
 } from "../../../helpers/weather";
+
 import Error from "../Error";
 import Loading from "../Loading";
 import WeatherConditions from "./WeatherConditions";
+
+import classes from "./Weather.module.scss";
 
 const Weather = (props) => {
   const [selectedSystem, setSelectedSystem] = useState(IMPERIAL_STR);
