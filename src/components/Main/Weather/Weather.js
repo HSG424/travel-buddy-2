@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, Fragment } from "react";
 
-import useHttp from "../../../hooks/use-accuweather-mock-data";
-//import useHttp from "../../hooks/use-http";
+//import useHttp from "../../../hooks/use-accuweather-mock-data";
+import useHttp from "../../hooks/use-http";
 
 import {
   WEATHER_STR,

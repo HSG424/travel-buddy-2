@@ -8,7 +8,7 @@ export const IMPERIAL_STR = "Imperial";
  * 'accuWeatherAPI' is the URL for AccuWeather API requests.
  * @const {String}
  */
-export const ACCUWEATHER_API = "http://dataservice.accuweather.com/";
+export const ACCUWEATHER_API = "https://dataservice.accuweather.com/";
 
 /**
  * 'accuWeatherKey' is the API key for AccuWeather API

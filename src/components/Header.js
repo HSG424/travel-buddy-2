@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header>
       <h1 className={`${classes["logo-style"]}`}>
-        <a href="/#" className={`mx-auto d-block ${classes["header-width"]}`}>
+        <a href="#" className={`mx-auto d-block ${classes["header-width"]}`}>
           <img
             src={logo}
             className={`d-block ${classes["header-width"]}`}
