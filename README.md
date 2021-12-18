@@ -2,9 +2,9 @@
 
 [Travel Buddy Reloaded](https://travel-buddy-reloaded.web.app) provides tools to users that are traveling to foreign countries.
 
-Current weather conditions ([AccuWeather API](https://developer.accuweather.com/apis)) are displayed after detecting the user's latitude and longitude via the Geolocation API. There is also a language translation tool users can use which consumes API endpoints provided by [MyMemory](https://mymemory.translated.net/doc/spec.php) (language translation).
+Current weather conditions ([AccuWeather API](https://developer.accuweather.com/apis)) are displayed after detecting the user's latitude and longitude via the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API). There is also a language translation tool users can use which consumes API endpoints provided by [MyMemory](https://mymemory.translated.net/doc/spec.php) (language translation).
 
-Travel Buddy Reloaded uses [React](https://reactjs.org/) while the original [Travel Buddy](https://github.com/HSG424/travel-buddy) uses Vanilla JavaScript.
+[Travel Buddy Reloaded](https://travel-buddy-reloaded.web.app) uses [React](https://reactjs.org/) while the original [Travel Buddy](https://github.com/HSG424/travel-buddy) uses Vanilla JavaScript.
 
 Live deployment (Firebase): [https://travel-buddy-reloaded.web.app](https://travel-buddy-reloaded.web.app)
 
@@ -17,11 +17,11 @@ Live deployment (Firebase): [https://travel-buddy-reloaded.web.app](https://trav
 
 Clone down this repository. You will need `node`, `npm`, and `yarn` installed globally on your machine.
 
+### In the project directory, you can run:
+
 ### `yarn install`
 
 Installs project dependencies (node_modules) as defined in package.json.
-
-### In the project directory, you can run:
 
 ### `yarn start`
 
@@ -47,7 +47,7 @@ The original [Travel Buddy](https://github.com/HSG424/travel-buddy) web app was 
 
 In order to practice key concepts I learned in [Udemy’s top React course](https://www.udemy.com/course/react-the-complete-guide-incl-redux/), I chose to redo the Travel Buddy project using React.
 
-This was not my first time using a front-end library/framework:
+This was not my first time using a front-end library/framework.
 
 My last job primarily involved using Vue.js so the React development and build process was nothing new or difficult.
 
