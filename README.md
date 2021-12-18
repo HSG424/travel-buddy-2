@@ -10,7 +10,7 @@ Live deployment (Firebase): [https://travel-buddy-reloaded.web.app](https://trav
 
 ## Project Screen Shots
 
-...
+![Weather functionality screenshot](/../<screenshots>/screenshots/ss1.jpg?raw=true "Weather functionality screenshot")
 
 ## Installation and Setup Instructions
 
