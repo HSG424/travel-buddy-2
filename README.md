@@ -1,10 +1,26 @@
-# Getting Started with Create React App
+# Travel Buddy Reloaded
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Travel Buddy Reloaded](https://travel-buddy-reloaded.web.app) provides tools to users that are traveling to foreign countries.
 
-## Available Scripts
+Current weather conditions ([AccuWeather API](https://developer.accuweather.com/apis)) are displayed after detecting the user's latitude and longitude via the Geolocation API. There is also a language translation tool users can use which consumes API endpoints provided by [MyMemory](https://mymemory.translated.net/doc/spec.php) (language translation).
 
-In the project directory, you can run:
+Travel Buddy Reloaded uses [React](https://reactjs.org/) while the original [Travel Buddy](https://github.com/HSG424/travel-buddy) uses Vanilla JavaScript.
+
+Live deployment (Firebase): [https://travel-buddy-reloaded.web.app](https://travel-buddy-reloaded.web.app)
+
+## Project Screen Shots
+
+...
+
+## Installation and Setup Instructions
+
+Clone down this repository. You will need `node`, `npm`, and `yarn` installed globally on your machine.
+
+### `yarn install`
+
+Installs project dependencies (node_modules) as defined in package.json.
+
+### In the project directory, you can run:
 
 ### `yarn start`
 
@@ -13,11 +29,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
@@ -29,42 +40,38 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## Reflection
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The original [Travel Buddy](https://github.com/HSG424/travel-buddy) web app was developed using Vanilla Javascript.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In order to practice key concepts I learned in [Udemy’s top React course](https://www.udemy.com/course/react-the-complete-guide-incl-redux/), I chose to redo the Travel Buddy project using React.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This was not my first time using a front-end library/framework:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+My last job primarily involved using Vue.js so the React development and build process was nothing new or difficult.
 
-## Learn More
+## Built With
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create React App](https://create-react-app.dev/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Bootstrap 5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/) - CSS Framework
 
-### Code Splitting
+- [Sass](https://sass-lang.com/) - CSS preprocessor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) - Get user latitude and longitude
 
-### Analyzing the Bundle Size
+- [AccuWeather API](https://developer.accuweather.com/apis) - Get location name and current weather stats
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [MyMemory API](https://mymemory.translated.net/doc/spec.php) - Translate language
 
-### Making a Progressive Web App
+- [Visual Studio Code](https://code.visualstudio.com/) - Text editor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [Chrome Web Browser](https://www.google.com/chrome/) - Web browser where application is run
 
-### Advanced Configuration
+## Authors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **Fred Han** - (https://github.com/HSG424)
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License
