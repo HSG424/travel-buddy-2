@@ -9,7 +9,7 @@ const Header = () => {
           <img
             src={logo}
             className={`d-block ${classes["header-width"]}`}
-            alt="Travel Buddy Reloaded Logo"
+            alt="Travel Buddy 2 Logo"
           />
         </a>
       </h1>

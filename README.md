@@ -1,10 +1,10 @@
-# Travel Buddy Reloaded
+# Travel Buddy 2
 
-[Travel Buddy Reloaded](https://travel-buddy-reloaded.web.app) provides tools to users that are traveling to foreign countries.
+[Travel Buddy 2](https://travel-buddy-reloaded.web.app) provides tools to users that are traveling to foreign countries.
 
 Current weather conditions ([AccuWeather API](https://developer.accuweather.com/apis)) are displayed after detecting the user's latitude and longitude via the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API). There is also a language translation tool users can use which consumes API endpoints provided by [MyMemory](https://mymemory.translated.net/doc/spec.php) (language translation).
 
-[Travel Buddy Reloaded](https://travel-buddy-reloaded.web.app) uses [React](https://reactjs.org/) while the original [Travel Buddy](https://github.com/HSG424/travel-buddy) uses Vanilla JavaScript.
+[Travel Buddy 2](https://travel-buddy-reloaded.web.app) uses [React](https://reactjs.org/) while the original [Travel Buddy](https://github.com/HSG424/travel-buddy) uses Vanilla JavaScript.
 
 Live deployment (Firebase): [https://travel-buddy-reloaded.web.app](https://travel-buddy-reloaded.web.app)
 
